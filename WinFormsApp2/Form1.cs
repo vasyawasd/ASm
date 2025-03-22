@@ -9,25 +9,13 @@
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Console.Write("Введите значение переменной a: ");
-            string inputA = Console.ReadLine();
-            if (!double.TryParse(inputA, out double a))
-            {
-                Console.WriteLine("Ошибка: 'a' должно быть числом!");
-                return;
-            }
-            Console.Write("Введите значение переменной x: ");
-            string inputX = Console.ReadLine();
-            if (!double.TryParse(inputX, out double x))
-            {
-                Console.WriteLine("Ошибка: 'x' должно быть числом!");
-                return;
-            }
+            int a = int.Parse(textBox1.Text);
+
+            int x = int.Parse(textBox1.Text);
 
             if (x == 0)
             {
-                Console.WriteLine("Ошибка: x не может быть нулём!");
-                return;
+                label1.Text = "x не может быть нулём!";
             }
 
             if (a * a * a - x * x < 0)
