@@ -11,23 +11,22 @@
         {
             int a = int.Parse(textBox1.Text);
 
-            int x = int.Parse(textBox1.Text);
+            int x = int.Parse(textBox2.Text);
 
             if (x == 0)
             {
-                label1.Text = "x не может быть нулём!";
+                label5.Text = "Ошибка: x не может быть нулём!";
+                return;
             }
 
             if (a * a * a - x * x < 0)
             {
-                Console.WriteLine("Ошибка: a³ должно быть >= x²!");
-                return;
+                label5.Text = "Ошибка: a³ должно быть >= x²!";
             }
 
             if (Math.Abs(a) > Math.Abs(x))
             {
-                Console.WriteLine("Ошибка: |a| должно быть <= |x|!");
-                return;
+                label5.Text = "Ошибка: |a| должно быть <= |x|!";
             }
 
             double part1 = Math.Sqrt(a * a * a - x * x) / x;
@@ -35,14 +34,19 @@
             double F = part1 + part2;
 
 
-            Console.WriteLine($"Результат F в десятичной системе: {F}");
+            label3.Text = ($"Результат F в десятичной системе: {F}");
 
             int integerPart = (int)Math.Floor(F);
             string binaryString = Convert.ToString(integerPart, 2);
-            label1.Text = ($"Целая часть в двоичной системе: {binaryString}");
+            label4.Text = ($"Целая часть в двоичной системе: {binaryString}");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }
