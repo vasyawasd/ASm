@@ -63,7 +63,6 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(100, 23);
             textBox1.TabIndex = 2;
-            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // label2
             // 
@@ -82,7 +81,6 @@
             label3.Size = new Size(196, 15);
             label3.TabIndex = 4;
             label3.Text = "Результат F в десятичной системе:";
-            label3.Click += label3_Click;
             // 
             // label4
             // 
