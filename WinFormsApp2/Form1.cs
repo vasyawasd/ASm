@@ -22,11 +22,13 @@
             if (a * a * a - x * x < 0)
             {
                 label5.Text = "Ошибка: a³ должно быть >= x²!";
+                return;
             }
 
             if (Math.Abs(a) > Math.Abs(x))
             {
                 label5.Text = "Ошибка: |a| должно быть <= |x|!";
+                return;
             }
 
             double part1 = Math.Sqrt(a * a * a - x * x) / x;
