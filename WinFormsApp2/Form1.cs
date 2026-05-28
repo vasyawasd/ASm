@@ -19,18 +19,23 @@
                 return;
             }
 
-            if (a * a * a - x * x < 0)
+            var a2 = a * a;
+            var x2 = x * x;
+            var a3_minus_x2 = a2 * a - x2;
+            var absA = Math.Abs(a);
+
+            if (a3_minus_x2 < 0)
             {
                 label5.Text = "Ошибка: a³ должно быть >= x²!";
             }
 
-            if (Math.Abs(a) > Math.Abs(x))
+            if (absA > Math.Abs(x))
             {
                 label5.Text = "Ошибка: |a| должно быть <= |x|!";
             }
 
-            double part1 = Math.Sqrt(a * a * a - x * x) / x;
-            double part2 = (a * a / 2) * Math.Acos(Math.Abs(a) / x) * Math.Tan(x * x);
+            double part1 = Math.Sqrt(a3_minus_x2) / x;
+            double part2 = (a2 / 2) * Math.Acos(absA / x) * Math.Tan(x2);
             double F = part1 + part2;
 
 
