@@ -82,7 +82,6 @@
             label3.Size = new Size(196, 15);
             label3.TabIndex = 4;
             label3.Text = "Результат F в десятичной системе:";
-            label3.Click += label3_Click;
             // 
             // label4
             // 
