@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <locale.h>
+#include <string.h>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -24,12 +25,8 @@ typedef struct {
     int32_t disp;
 } Operand;
 
-static inline bool is_space(char c) {
-    return c == ' ' || c == '\t';
-}
-
 static inline void skip_space(const char **p) {
-    while (is_space(**p)) (*p)++;
+    while (**p == ' ' || **p == '\t') (*p)++;
 }
 
 static inline int parse_reg_fast(const char **p) {
@@ -283,15 +280,17 @@ static void process_instruction(const char *input) {
     const char *p = input;
     skip_space(&p);
 
-    const char *exp = "vmovdqa64";
-    for (int i = 0; i < 9; i++) {
-        if ((p[i] | 32) != exp[i]) {
-            fputs("Ошибка: Команда не совпадает с заданной (VMOVDQA64). Программа завершает работу.\n", stdout);
-            exit(0);
-        }
+    // Fast 64-bit comparison for "vmovdqa6" (8 bytes) + '4'
+    uint64_t cmd_val;
+    memcpy(&cmd_val, p, 8);
+    // ORing with 0x2020202020202020 converts ASCII letters to lowercase
+    // 'vmovdqa6' | 0x2020202020202020 = 0x36617164766f6d76 (little endian)
+    if ((cmd_val | 0x2020202020202020ULL) != 0x36617164766f6d76ULL || p[8] != '4') {
+        fputs("Ошибка: Команда не совпадает с заданной (VMOVDQA64). Программа завершает работу.\n", stdout);
+        exit(0);
     }
     p += 9;
-    if (*p && !is_space(*p) && *p != ',') {
+    if (*p && !(*p == ' ' || *p == '\t') && *p != ',') {
         fputs("Ошибка: Команда не совпадает с заданной (VMOVDQA64). Программа завершает работу.\n", stdout);
         exit(0);
     }
