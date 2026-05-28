@@ -9,9 +9,11 @@
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int a = int.Parse(textBox1.Text);
-
-            int x = int.Parse(textBox2.Text);
+            if (!int.TryParse(textBox1.Text, out int a) || !int.TryParse(textBox2.Text, out int x))
+            {
+                label5.Text = "Ошибка: Некорректный ввод данных. Введите целые числа.";
+                return;
+            }
 
             if (x == 0)
             {
@@ -22,11 +24,13 @@
             if (a * a * a - x * x < 0)
             {
                 label5.Text = "Ошибка: a³ должно быть >= x²!";
+                return;
             }
 
             if (Math.Abs(a) > Math.Abs(x))
             {
                 label5.Text = "Ошибка: |a| должно быть <= |x|!";
+                return;
             }
 
             double part1 = Math.Sqrt(a * a * a - x * x) / x;
